@@ -7,7 +7,7 @@ có nhiều loại compiler : ví dụ `gcc`
 
 Kiểu dữ liệu là gì ? 
 
-Quá trình tiền xử lý được gọi là `preprocessor` quá trình này chẳng qua là biên dịch lại file `.c` và `.h` [hay còn gọi là source file] sang dạng file `main.i` hay còng được gọi là `preprocessed source`, quá trình nãy cũng là copy toàn bộ các file chứa trong `#include`\n 
+Quá trình tiền xử lý được gọi là `preprocessor` quá trình này chẳng qua là biên dịch lại file `.c` và `.h` [hay còn gọi là source file] sang dạng file `main.i` hay còng được gọi là `preprocessed source`, quá trình nãy cũng là copy toàn bộ các file chứa trong `#include` 
 
 một dạng macro khác ví dụ hàm macro 
 
@@ -27,6 +27,15 @@ Vậy quá trình tiền xử lý có thể gồm các việc sau :
 -Bước cuối cùng là Linker chuyển thành dạng file main.exe [đổi với Windows] để người dùng có thể run 
 
 <img src="https://i.ytimg.com/vi/LOWQg8BNQJ4/maxresdefault.jpg">
-# Bài 2 
+
+# Bài 2 Memory Layout 
+
+Các dữ liệu sẽ luôn được khởi tạo ở vùng nhớ RAM
+
+Do tài nguyên không được nhiều nên chúng ta luôn cần phải tối ưu bộ nhớ 
+
+## Các vùng nhớ 
+
+
 # Bài 3 
 # Bài 4
