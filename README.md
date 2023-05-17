@@ -23,7 +23,7 @@ Vậy quá trình tiền xử lý có thể gồm các việc sau :
 Qúa trình tiếp theo là quá trình compiler chuyển từ file main.i sang file main.s hay còn gọi là file assembly code
 
 Tiếp đó là quá trình Assembler chuyển thành file main.o hay main.obj tại bước này các file thư việc của âm thanh và hình ảnh sẽ được thêm vào 
-
+https://i.ytimg.com/vi/LOWQg8BNQJ4/maxresdefault.jpg
 Bước cuối cùng là Linker chuyển thành dạng file main.exe [đổi với Windows] để người dùng có thể run 
 # Bài 2 
 # Bài 3 
