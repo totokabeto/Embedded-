@@ -3,6 +3,8 @@
 #include <stdint.h>
 uint8_t PORTA = 0b00000000; 
 uint8_t PORTB = 0b11111111;
+
+
 typedef enum{
 PIN0,
 PIN1,
@@ -17,7 +19,7 @@ PIN7
 
 typedef enum {
     LOW,
-    HIGH,
+    HIGH
 }s_status; 
 
 void ReadByte(uint8_t byte){                                                
@@ -35,61 +37,35 @@ if (b == 00000000){
 byte <<= 1;
 }
 }
+
 void pinHigh(pins pin){
-    PORTA = PORTA | (0b1000000 >> pin); 
-
-
-    switch (pin)
-    {
-    case PIN0:
-        /* code */
-        PORTA = 0b10000000;
-        break;
-     case PIN1:
-        /* code */
-        PORTA = 0b01000000;
-        break;
-         case PIN2:
-        /* code */
-        PORTA = 0b00100000;
-        break;
-         case PIN3:
-        /* code */
-        PORTA = 0b00010000;
-        break;
-         case PIN4:
-        /* code */
-        PORTA = 0b00001000;
-        break;
-          case PIN5:
-        /* code */
-        PORTA = 0b00000100;
-        break;
-          case PIN6:
-        /* code */
-        PORTA = 0b00000100;
-        break;
-          case PIN7:
-        /* code */
-        PORTA = 0b00000001;
-        break;
-    default:
-        break;
-    }
+PORTA = PORTA | (0b10000000 >> pin); 
 }
 
 void pinLow(pins pin){
-PORTB = PORTB & ~(0b10000000 >> pin);
+PORTA = PORTA & ~(0b10000000 >> pin);
 }
 
-
+void digitalWrite(pins pin, s_status status){
+    if (status == 0)
+    {
+    pinLow(pin);
+    } else 
+    {
+     pinHigh(pin);
+    }
+    
+}
 int main(int argc, char const *argv[])
 {
     /* code */
-    pinHigh(PIN1);
-    pinLow(PIN2);
-   // ReadByte(PORTA);
+   
 
-    ReadByte(PORTB);
+    digitalWrite (PIN3,HIGH);
+    digitalWrite (PIN6,HIGH);
+
+    digitalWrite (PIN6,LOW);
+
+    ReadByte(PORTA);
     return 0;
 }
