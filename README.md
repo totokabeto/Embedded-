@@ -37,61 +37,68 @@ Do tài nguyên không được nhiều nên chúng ta luôn cần phải tối 
 ## Các vùng nhớ 
 Phân vùng nhớ
  <img src="https://courses.engr.illinois.edu/cs225/fa2022/assets/notes/stack_heap_memory/memory_layout.png">
+
 •	Text :
 – Quyền truy cập chỉ Read và nó chưa lệnh để thực thi nên tránh sửa đổi instruction.
+
 – Chứa khai báo hằng số trong chương trình (.rodata) vd : char * arr2 = “Hello” 
+
 •	Data:
+
 – Quyền truy cập là read-write.
+
 – Chứa biến toàn cục or biến static với giá trị khởi tạo khác không.
+
 – Được giải phóng khi kết thúc chương trình.
+
 •	Bss:
+
 – Quyền truy cập là read-write.
+
 – Chứa biến toàn cục or biến static với giá trị khởi tạo bằng không or không khởi tạo.
+
 – Được giải phóng khi kết thúc chương trình.
+
 •	Stack:
 – Quyền truy cập là read-write.
+
 – Được sử dụng cấp phát cho biến local, input parameter của hàm,…
+
 – Sẽ được giải phóng khi ra khỏi block code/hàm
+
 •	Heap:
 – Quyền truy cập là read-write.
+
 – Được sử dụng để cấp phát bộ nhớ động như: Malloc, Calloc, …
+
 – Sẽ được giải phóng khi gọi hàm free,…
-ví dụ : uint8_t* ptr = (uint8_t*) malloc(sizeof(uint_8)*5);  Cấp phát động một mảng có giá trị là 5 byte. Khởi tạo con trỏ để lưu địa chỉ biến đầu tiên, ép kiểu và hàm malloc trả về một con trỏ void. Con trỏ giá trị nào thỉ chỉ lưu được giá trí đó mà thôi, muốn lưu giá trị khác ta phải tiến hành ép kiểu type cast 
+
+ví dụ : uint8_t* ptr = (uint8_t*) malloc(sizeof(uint_8)*5);  Cấp phát động một mảng có giá trị là 5 byte. 
+
+Khởi tạo con trỏ để lưu địa chỉ biến đầu tiên, ép kiểu và hàm malloc trả về một con trỏ void. Con trỏ giá 
+
+trị nào thỉ chỉ lưu được giá trí đó mà thôi, muốn lưu giá trị khác ta phải tiến hành ép kiểu type cast 
+
 Realloc() là hàm thay đổi kích thước của mảng mà mình đã cấp phát động
-Vd : arr = (uint8_t*)realloc(arr,sizeof(uint8_t)*3); 
+
+Vd : `arr = (uint8_t*)realloc(arr,sizeof(uint8_t)*3); `
+
 Thay đổi mảng đã cấp phát động từ 5 byte về còn 3 byte 
+
 Sự khác biệt giữa hàm calloc và malloc 
-Khác biệt rõ rệt mà có thể thấy được là hàm calloc sẽ gán giá trị = 0 một cách tự động cho các phần tử trong mảng mà người dùng khởi tạo. Hơn nữa còn khác biệt về mặt tốc độ nếu ta tìm hiểu sâu 
-Note : 
+
+Khác biệt rõ rệt mà có thể thấy được là hàm calloc sẽ gán giá trị = 0 một cách tự động cho các phần tử trong 
+
+mảng mà người dùng khởi tạo. Hơn nữa còn khác biệt về mặt tốc độ nếu ta tìm hiểu sâu 
+
+*Note :*
+
 Mảng là những địa chỉ liền kề nhau, bản thân mảng đã lưu địa chỉ của phần tử đầu tiên 
+
 arr : địa chỉ 
+
 *arr : giá trị 
-2. Stack và Heap?
-•	Bộ nhớ Heap và bộ nhớ Stack bản chất đều cùng là vùng nhớ được tạo ra và lưu trữ trong RAM khi chương trình được thực thi.
-•	Bộ nhớ Stack được dùng để lưu trữ các biến cục bộ trong hàm, tham số truyền vào... Truy cập vào bộ nhớ này rất nhanh và được thực thi khi chương trình được biên dịch.
-•	Bộ nhớ Heap được dùng để lưu trữ vùng nhớ cho những biến con trỏ được cấp phát động bởi các hàm malloc - calloc - realloc (trong C)
-•	Kích thước vùng nhớ
-Stack: kích thước của bộ nhớ Stack là cố định, tùy thuộc vào từng hệ điều hành, ví dụ hệ điều hành Windows là 1 MB, hệ điều hành Linux là 8 MB (lưu ý là con số có thể khác tùy thuộc vào kiến trúc hệ điều hành của bạn).
-Heap: kích thước của bộ nhớ Heap là không cố định, có thể tăng giảm do đó đáp ứng được nhu cầu lưu trữ dữ liệu của chương trình.
-•	Đặc điểm vùng nhớ
-Stack: vùng nhớ Stack được quản lý bởi hệ điều hành, dữ liệu được lưu trong Stack sẽ tự động hủy khi hàm thực hiện xong công việc của mình.
-Heap: Vùng nhớ Heap được quản lý bởi lập trình viên (trong C hoặc C++), dữ liệu trong Heap sẽ không bị hủy khi hàm thực hiện xong, điều đó có nghĩa bạn phải tự tay hủy vùng nhớ bằng câu lệnh free (trong C), và delete hoặc delete [] (trong C++), nếu không sẽ xảy ra hiện tượng rò rỉ bộ nhớ. 
 
-Lưu ý: việc tự động dọn vùng nhớ còn tùy thuộc vào trình biên dịch trung gian.
-•	Vấn đề lỗi xảy ra đối với vùng nhớ
-Stack: bởi vì bộ nhớ Stack cố định nên nếu chương trình bạn sử dụng quá nhiều bộ nhớ vượt quá khả năng lưu trữ của Stack chắc chắn sẽ xảy ra tình trạng tràn bộ nhớ Stack (Stack overflow), các trường hợp xảy ra như bạn khởi tạo quá nhiều biến cục bộ, hàm đệ quy vô hạn,...
-Ví dụ về tràn bộ nhớ Stack với hàm đệ quy vô hạn:
-int foo(int x){
-    printf("De quy khong gioi han\n");
-    return foo(x);
-}
-Heap: Nếu bạn liên tục cấp phát vùng nhớ mà không giải phóng thì sẽ bị lỗi tràn vùng nhớ Heap (Heap overflow).
-Nếu bạn khởi tạo một vùng nhớ quá lớn mà vùng nhớ Heap không thể lưu trữ một lần được sẽ bị lỗi khởi tạo vùng nhớ Heap thất bại.
-Ví dụ trường hợp khởi tạo vùng nhớ Heap quá lớn:
-int *A = (int *)malloc(18446744073709551615);
+# Bài 3 Macro&Function 
 
-
-
-
-# Bài 3 
-# Bài 4
+# Bài 4 Thao tac bit 
