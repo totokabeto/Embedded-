@@ -101,4 +101,76 @@ arr : địa chỉ
 
 # Bài 3 Macro&Function 
 
-# Bài 4 Thao tac bit 
+# Bài 4 Thao tác bit 
+
+Tiếng Anh gọi là bitwise operator 
+
+## And 
+
+Các phép `&` thao tác được thực hiện cho các mã nhị phân và *tương tự như một phép nhân đại số*
+
+muốn giữ lại bit đầu tiên ta thường dùng `AND`
+
+0b1000000 & 0b10010001 = 10000000 
+
+| A | B | A & B| 
+|--------------|-------|------|
+| 0 | 0| 0| 
+| 0 | 1 | 0 | 
+| 1 | 0 | 0| 
+| 1 | 1 | 1| 
+
+0x0 = 0; 1x1 = 1; 
+
+`1. AND 
+unsigned char a = 5; // 00000101
+
+unsigned char b = 6; // 00000110
+`
+## NOT ~
+
+| A | NOT A |  
+|--------------|-------|
+| 0 | 1| 
+| 1 |0 |  
+
+## OR |
+
+Tương tự như một phép cộng đại số 
+
+| A | B | A OR B| 
+|--------------|-------|------|
+| 0 | 0| 0| 
+| 0 | 1 | 1 | 
+| 1 | 0 | 1| 
+| 1 | 1 | 1| 
+
+0 + 0 = 0; 1 + 0 = 1; 1 + 1 = 2 nhớ 1 
+
+## XOR ^ 
+
+2 cái giống nhau thì XOR sẽ ra 0 
+
+| A | B | A XOR B| 
+|--------------|-------|------|
+| 0 | 0| 0| 
+| 0 | 1 | 1 | 
+| 1 | 0 | 1| 
+| 1 | 1 | 0| 
+
+## Dịch trái <<
+
+``
+unsigned char a = 5; // 00000101
+unsigned char b = a << 4;> // 01010000
+``
+
+
+## Dịch phải >>
+
+Sử dụng trong bài pinHigh, pinLow dùng enum 
+
+```
+void pinHigh(pins pin){
+PORTA = PORTA | (0b10000000 >> pin); 
+}```
