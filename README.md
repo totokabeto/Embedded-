@@ -111,7 +111,7 @@ Các phép `&` thao tác được thực hiện cho các mã nhị phân và *t�
 
 muốn giữ lại bit đầu tiên ta thường dùng `AND`
 
-0b1000000 & 0b10010001 = 10000000 
+``0b1000000 & 0b10010001 = 10000000``
 
 | A | B | A & B| 
 |--------------|-------|------|
@@ -124,7 +124,6 @@ muốn giữ lại bit đầu tiên ta thường dùng `AND`
 
 ``1. AND 
 unsigned char a = 5; // 00000101
-
 unsigned char b = 6; // 00000110
 ``
 ## NOT ~
