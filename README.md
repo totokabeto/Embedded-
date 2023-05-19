@@ -122,11 +122,11 @@ muốn giữ lại bit đầu tiên ta thường dùng `AND`
 
 0x0 = 0; 1x1 = 1; 
 
-`1. AND 
+``1. AND 
 unsigned char a = 5; // 00000101
 
 unsigned char b = 6; // 00000110
-`
+``
 ## NOT ~
 
 | A | NOT A |  
@@ -170,7 +170,7 @@ unsigned char b = a << 4;> // 01010000
 
 Sử dụng trong bài pinHigh, pinLow dùng enum 
 
-```
+``
 void pinHigh(pins pin){
 PORTA = PORTA | (0b10000000 >> pin); 
-}```
+}``
