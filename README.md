@@ -113,21 +113,25 @@ khởi tạo file `main.i` trong VSCode : gcc -E main.c -o main.i
 
 `#define SUM(a,b) a+b`
 
-``#define CREATE_FUNC(ten_ham,noi_dung)   \ 
+```
+#define CREATE_FUNC(ten_ham,noi_dung)   \ 
 
 void ten_ham(){                           \
 
     printf("%s \n", noi_dung);            \
 
-} hàng cuối cùng thì không cần dấu \ ``
+} hàng cuối cùng thì không cần dấu \ 
+```
 
 *khi xuống dòng trong macro thì dùng dấu \ *
 
-``CREATE_FUNC(test,"this is test");
+```
+CREATE_FUNC(test,"this is test");
 int main(){
     test();
     return 0;
-}``
+}
+```
 
 *Bản chất của macro không phải là hàm và biến mà chỉ là định nghĩa mà thôi.*
 
@@ -137,9 +141,11 @@ Nhược điểm là size của file biên dịch sẽ lớn hơn vì macro đư
 
 tương tự như macro ở phía trên ta cũng có thể viết hàm SUM 
 
+```
 int SUM (int a, int b){
     return a+b; 
 }
+```
 ### Boot process
 
  <img src="https://img-blog.csdnimg.cn/img_convert/702b57fe19fd445cfebfc795aa711c74.png">
@@ -149,7 +155,7 @@ Khi vi điều khiển được cấp nguồn sẽ khởi tạo địa chỉ đ�
 Mỗi loại vi điều khiển thì có các loại như 8 bit , 16 bit , 32 bit , 64 bit. Mỗi loại vi điều khiển thì lại có một bước nhảy ví dụ vdk 8 bit có bước nhảy là 1 byte, vđk 16 bit thì bước nhảy là 2 byte v..v 
 
 *Lấy ví dụ vdk STM32* 
-
+```
 Khi cấp nguồn khởi tạo địa chỉ đầu tiên là `0x00`  đồng thời khởi tạo `Stack Pointer`
                                              
                                            `0x04` khởi tạo `Programe Counter`
@@ -157,14 +163,14 @@ Khi cấp nguồn khởi tạo địa chỉ đầu tiên là `0x00`  đồng th�
                                            `0x08` 
 
                                            `0x0c` 
-
+```
 *Programe Counter* : là một bộ đếm giúp vdk có thể chạy được 
 
 *Stack Pointer* : Lưu địa chỉ của con trỏ 
 
 => Khi thay đổi vị trí đột ngột không theo một quy luật nào , vdk sẽ luu địa chỉ tiếp theo vào `Stack Pointer` và tiếp tục đếm nhờ `Programe Counter` khi đếm hết thì lại tiếp tục quay lại vị trí địa chỉ cũ 
 
-``
+```
 int main(){       0x01
                   0x02 
     while(1){     0x03 
@@ -176,7 +182,7 @@ void A(){         0xc1
 
 
 }                 0xc6 
-``
+```
 
 *Note* 1 bước nhảy 8 bit sẽ thực hiện một phép 8 bit and so on 
 
