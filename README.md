@@ -142,6 +142,8 @@ int SUM (int a, int b){
 }
 ### Boot process
 
+ <img src="https://img-blog.csdnimg.cn/img_convert/702b57fe19fd445cfebfc795aa711c74.png">
+
 Khi vi điều khiển được cấp nguồn sẽ khởi tạo địa chỉ đầu tiên là  `0x00`
 
 Mỗi loại vi điều khiển thì có các loại như 8 bit , 16 bit , 32 bit , 64 bit. Mỗi loại vi điều khiển thì lại có một bước nhảy ví dụ vdk 8 bit có bước nhảy là 1 byte, vđk 16 bit thì bước nhảy là 2 byte v..v 
