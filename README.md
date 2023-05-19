@@ -161,7 +161,9 @@ Tương tự như một phép cộng đại số
 
 ``
 unsigned char a = 5; // 00000101
+
 unsigned char b = a << 4;> // 01010000
+
 ``
 
 
@@ -171,5 +173,7 @@ Sử dụng trong bài pinHigh, pinLow dùng enum
 
 ``
 void pinHigh(pins pin){
+
 PORTA = PORTA | (0b10000000 >> pin); 
+
 }``
