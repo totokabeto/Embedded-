@@ -159,21 +159,22 @@ Tương tự như một phép cộng đại số
 
 ## Dịch trái <<
 
-``
+```
 unsigned char a = 5; // 00000101
 
 unsigned char b = a << 4;> // 01010000
 
-``
+```
 
 
 ## Dịch phải >>
 
 Sử dụng trong bài pinHigh, pinLow dùng enum 
 
-``
+```
 void pinHigh(pins pin){
 
 PORTA = PORTA | (0b10000000 >> pin); 
 
-}``
+}
+```
