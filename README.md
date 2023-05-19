@@ -101,7 +101,106 @@ arr : địa chỉ
 
 # Bài 3 Macro&Function 
 
+- diễn ra ở quá trình tiền xử lý 
+
+- bản chất của macro là thay thế định nghĩa 
+
+`#define MAX 10` 
+
+khởi tạo file `main.i` trong VSCode : gcc -E main.c -o main.i 
+
+*hàm macro* 
+
+`#define SUM(a,b) a+b`
+
+``#define CREATE_FUNC(ten_ham,noi_dung)   \ 
+
+void ten_ham(){                           \
+
+    printf("%s \n", noi_dung);            \
+
+} hàng cuối cùng thì không cần dấu \ ``
+
+*khi xuống dòng trong macro thì dùng dấu \ *
+
+``CREATE_FUNC(test,"this is test");
+int main(){
+    test();
+    return 0;
+}``
+
+*Bản chất của macro không phải là hàm và biến mà chỉ là định nghĩa mà thôi.*
+
+Nhược điểm là size của file biên dịch sẽ lớn hơn vì macro được gọi nhiều lần 
+
+## Function 
+
+tương tự như macro ở phía trên ta cũng có thể viết hàm SUM 
+
+int SUM (int a, int b){
+    return a+b; 
+}
+### Boot process
+
+Khi vi điều khiển được cấp nguồn sẽ khởi tạo địa chỉ đầu tiên là  `0x00`
+
+Mỗi loại vi điều khiển thì có các loại như 8 bit , 16 bit , 32 bit , 64 bit. Mỗi loại vi điều khiển thì lại có một bước nhảy ví dụ vdk 8 bit có bước nhảy là 1 byte, vđk 16 bit thì bước nhảy là 2 byte v..v 
+
+*Lấy ví dụ vdk STM32* 
+
+Khi cấp nguồn khởi tạo địa chỉ đầu tiên là `0x00`  đồng thời khởi tạo `Stack Pointer`
+                                             
+                                           `0x04` khởi tạo `Programe Counter`
+
+                                           `0x08` 
+
+                                           `0x0c` 
+
+*Programe Counter* : là một bộ đếm giúp vdk có thể chạy được 
+
+*Stack Pointer* : Lưu địa chỉ của con trỏ 
+
+=> Khi thay đổi vị trí đột ngột không theo một quy luật nào , vdk sẽ luu địa chỉ tiếp theo vào `Stack Pointer` và tiếp tục đếm nhờ `Programe Counter` khi đếm hết thì lại tiếp tục quay lại vị trí địa chỉ cũ 
+
+``
+int main(){       0x01
+                  0x02 
+    while(1){     0x03 
+        A();      0x04 (lưu vào stack pointer)
+    }
+}
+
+void A(){         0xc1 
+
+
+}                 0xc6 
+``
+
+*Note* 1 bước nhảy 8 bit sẽ thực hiện một phép 8 bit and so on 
+
+VD : VDK 8 bit 16MHz -> 1s có 16 triệu dao động -> 1 dao động thực hiện được 1 phép tính 8 bit 
+
+- PORT 8 bit thì 1 dao động điều khiển được 8 LED , 32 bit điều khiển 32 LED 
+
+*Vậy function và macro khác nhau ntn* 
+
+macro đếm theo quy luật và không phải nhảy, chỉ việc thay thế (có thể đếm VD: 0x01 đến 0x05)
+
+dẫn đến tốc độ nhanh, nhưng kích thước file lại phải dài ra 
+
+funtion thì lại phải trỏ và lưu nhiều lần 
+
+dẫn đến tốc độ chậm, nhưng kích thước file được cố định, tối ưu hơn 
+
+#### Hàm inline 
+
+Khi build mã máy , copy mã máy vào chương trình máy đã hiểu được, không cần phải trỏ. hàm `inline` tức là đã build sang mã máy sẵn rồi mới copy vào chương trình.
+
+macro là copy vào chương trình rồi sau đó mới build sang mã file hex
+
+
 # Bài 4 Thao tác bit 
+
 
 Tiếng Anh gọi là bitwise operator 
 
