@@ -66,6 +66,8 @@ Phân vùng nhớ
 
 – Sẽ được giải phóng khi ra khỏi block code/hàm
 
+- bao gồm cả struct 
+
 •	Heap:
 – Quyền truy cập là read-write.
 
@@ -287,5 +289,67 @@ PORTA = PORTA | (0b10000000 >> pin);
 ```
 
 # Struct&Union 
-## Struct 
+## Struct
+Struct là một kiểu dữ liệu do người dùng tự định nghĩa 
 
+Khởi tạo struct thì truct sẽ thuộc vùng nhớ nào ? 
+
+Vùng nhớ stack 
+
+### Cách tính size of structure 
+
+Kích thước của structure sẽ là lấy kích thước của kiểu dữ liệu lớn nhất làm chuẩn cho mỗi lần quét cộng thêm cho các kích thước bộ nhớ đệm sau mỗi lần quét nếu có.
+
+Qúa trình này gọi là structure padding 
+
+ <img src="https://fastbitlab.com/wp-content/uploads/2022/12/Figure-1-13.png">
+ *Example*
+
+```
+struct typeDate
+{
+    uint8_t ngay; // 1 byte + 3 byte bo nho dem 
+    uint32_t thang; // 4 byte 
+    uint16_t nam; // 2 byte + 2 byte bo nho dem 
+};
+``` 
+*Tong cua structe ben tren la 12 bytes 
+
+```
+typedef struct 
+{
+  uint8_t arr1[7]; // 2*3 + 1 + 1 byte bo nho dem 
+  uint16_t arr2[5]; // 2 * 5 
+}sizeTest;
+// 18 byte 
+```
+
+```
+typedef struct 
+{
+    uint64_t arr1[6];
+    uint16_t arr2[5]; 
+    uint32_t arr3[3]; 
+}test;
+// 64 byte 
+```
+## Union 
+
+Cũng là kiểu dữ liệu do người dùng tự định nghĩa 
+
+Các member được lưu vào cùng một địa chỉ- địa chỉ dùng chung và bị liên tục ghi đè 
+
+## Kich thuoc cua union 
+
+Kich thuoc cua union la kich thuoc cua member lớn nhất 
+
+```
+typedef union 
+{
+    uint8_t test1[5];
+    uint8_t test2[3]; 
+}typeTest;
+ // kích thước là 5 byte 
+ ```
+
+ ứng dụng của union vào những bài toán chỉ được chọn 1 kiểu dữ liệu duy nhất trong tổng số các member để có thể tiết kiệm bộ nhớ 
