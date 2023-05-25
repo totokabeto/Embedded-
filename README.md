@@ -288,7 +288,7 @@ PORTA = PORTA | (0b10000000 >> pin);
 }
 ```
 
-# Struct&Union 
+# Bài 5 Struct&Union 
 ## Struct
 Struct là một kiểu dữ liệu do người dùng tự định nghĩa 
 
@@ -303,6 +303,7 @@ Kích thước của structure sẽ là lấy kích thước của kiểu dữ l
 Qúa trình này gọi là structure padding 
 
  <img src="https://fastbitlab.com/wp-content/uploads/2022/12/Figure-1-13.png">
+
  *Example*
 
 ```
@@ -313,7 +314,7 @@ struct typeDate
     uint16_t nam; // 2 byte + 2 byte bo nho dem 
 };
 ``` 
-*Tong cua structe ben tren la 12 bytes 
+*Tong cua structe ben tren la 12 bytes*
 
 ```
 typedef struct 
@@ -353,3 +354,131 @@ typedef union
  ```
 
  ứng dụng của union vào những bài toán chỉ được chọn 1 kiểu dữ liệu duy nhất trong tổng số các member để có thể tiết kiệm bộ nhớ 
+
+ # Bài 6 Static
+
+ ## Biến static cục bộ 
+
+Biến static cục bộ được khởi tạo một làn và tồn tại hết vòng đời chương trình, phạm vi truy cập của biến static cục bộ tương tự như biến local thông thường. 
+
+*ví dụ* 
+
+```
+void test(){
+    static int a = 10; 
+    printf("a = %d\n",a); 
+    a++; 
+}
+```
+
+
+## Biến static toàn cục 
+
+Biến static toàn cục thì chỉ giá trị trong file đó, không thể được lấy ra từ các file khác bằng từ khóa `#include` và `extern`. Tương tự biến global thì các hàm trong file đều có thễ sử dụng được nó. 
+
+### TỪ KHÓA EXTERN 
+
+Nhằm truy cập vào một biến global ở 2 file khác nhau 
+
+Giả sử có 1 file global ở file test.c và muốn sử dụng nó ở file main.c 
+
+`extern int count;`
+
+-sử dụng khi trong 1 project lớn và chúng ta không biết rõ vị trí của thư viện muốn include nằm ở đâu, lúc đó chỉ cần sử dụng extern là được 
+
+-Bản chất extern là 1 biến nhưng nằm ở 2 file khác nhau. 
+
+-ngoài ra còn có thể extern được hàm 
+
+`extern void dem()` 
+
+*không thể extern biến static toàn cục*
+
+một hàm được extern có chứa biến static thì vẫn chạy được do biến static lúc đó nằm trong 1 hàm không phải static 
+
+
+# Pointer 
+
+Khi khởi tạo 1 biến thì biến được lưu vào RAM, đặc trưng bằng địa chỉ và giá trị địa chỉ 
+
+ <img src="https://media.geeksforgeeks.org/wp-content/uploads/pointers-in-c.png">
+
+`int *ptr = 0x01` được gọi là biến con trỏ, con trỏ là biến lưu địa chỉ và giá trị của cái địa chỉ này phải là kiểu dữ liệu integer. 
+
+để lấy giá trị của con trỏ `*ptr = 10`
+để lấy địa chỉ `ptr = 0x01`
+
+## Con trỏ NULL 
+
+khi chưa gán giá trị cho con trỏ thì con trỏ tự động trỏ tới một địa rác và việc này rất nguy hiểm vì nó sẽ trỏ random tới 1 vị trí nào đó trên RAM (có thể có tính năng đặc biệt) vô tình tạo ra bug hoặc sai chương trình 
+
+`int* ptr = NULL;` 
+
+## Con trỏ hàm 
+
+bản thân hàm cũng có địa chỉ 
+
+khởi tạo con trỏ hàm 
+
+```
+void (*ptr)(int,int) = NULL;
+ptr = &tong;
+ptr(9,17);
+```
+
+Kiểu dữ liệu của hàm (tên con trỏ)(input parameter)
+
+Thông qua con trỏ hàm, có thể dùm hàm để làm input parameter của hàm khác 
+```
+void tong(int a, int b){
+    printf("Tong cua %d và %d la %d ",a,b,a+b);
+}
+
+void tinhToan(int a,int b, void (*ptr)(int,int )){
+    printf("Chuong trinh toan \n");
+    ptr(a,b);
+}
+```
+
+## Con trỏ void 
+
+Có thể trỏ đến mọi địa chỉ 
+
+Chỉ trỏ đến được thôi còn in ra thì không được 
+```
+ int i = 10; 
+
+    double d = 15.6; 
+
+    char c = 'A';
+
+    void *ptr = &i; 
+
+    printf("i = %d \n",*(int*)ptr);
+    ptr = &d; 
+    printf("i = %f \n",*(double *)ptr);
+    ptr = &c; 
+    printf("i = %c \n",*(char *)ptr);
+    ptr = &tong; 
+
+    ((void (*)(int,int))ptr)(9,16);
+```
+
+## Pointer to Pointer 
+
+ <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221111111142/PointersinC.png">
+
+
+
+`int* ptr = 10;` bản chất của nó cũng là biến nên cũng sẽ có địa chỉ và giá trị 
+
+`int **ptp = 0xc1;` pointer to pointer là con trỏ lưu địa chỉ của con trỏ 
+```
+int a = 15; 
+
+int *ptr2 = &a; 
+
+int **ptp = &ptr2; 
+
+printf("test : %d \n",**ptp);
+```
