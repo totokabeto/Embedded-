@@ -396,7 +396,7 @@ Giả sử có 1 file global ở file test.c và muốn sử dụng nó ở file
 một hàm được extern có chứa biến static thì vẫn chạy được do biến static lúc đó nằm trong 1 hàm không phải static 
 
 
-# Pointer 
+# Bài 7 Pointer 
 
 Khi khởi tạo 1 biến thì biến được lưu vào RAM, đặc trưng bằng địa chỉ và giá trị địa chỉ 
 
