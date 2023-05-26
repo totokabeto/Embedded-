@@ -115,7 +115,7 @@ khởi tạo file `main.i` trong VSCode : gcc -E main.c -o main.i
 
 `#define SUM(a,b) a+b`
 
-```
+```php
 #define CREATE_FUNC(ten_ham,noi_dung)   \ 
 
 void ten_ham(){                           \
@@ -143,7 +143,7 @@ Nhược điểm là size của file biên dịch sẽ lớn hơn vì macro đư
 
 tương tự như macro ở phía trên ta cũng có thể viết hàm SUM 
 
-```
+```php
 int SUM (int a, int b){
     return a+b; 
 }
@@ -172,7 +172,7 @@ Khi cấp nguồn khởi tạo địa chỉ đầu tiên là `0x00`  đồng th�
 
 => Khi thay đổi vị trí đột ngột không theo một quy luật nào , vdk sẽ luu địa chỉ tiếp theo vào `Stack Pointer` và tiếp tục đếm nhờ `Programe Counter` khi đếm hết thì lại tiếp tục quay lại vị trí địa chỉ cũ 
 
-```
+```php
 int main(){       0x01
                   0x02 
     while(1){     0x03 
@@ -315,7 +315,7 @@ struct typeDate
 ``` 
 *Tong cua structe ben tren la 12 bytes*
 
-```
+```php
 typedef struct 
 {
   uint8_t arr1[7]; // 2*3 + 1 + 1 byte bo nho dem 
