@@ -3,9 +3,8 @@
 Vi xử lý có thể hoạt động là do cấu tạo bao gồm nhiều con transistor với nhau 
 
 có nhiều loại compiler : ví dụ `gcc`
-`define MAX 10` là một loại macro 
 
-Kiểu dữ liệu là gì ? 
+`define MAX 10` là một loại macro =>> Kiểu dữ liệu là gì ? 
 
 Quá trình tiền xử lý được gọi là `preprocessor` quá trình này chẳng qua là biên dịch lại file `.c` và `.h` [hay còn gọi là source file] sang dạng file `main.i` hay còng được gọi là `preprocessed source`, quá trình nãy cũng là copy toàn bộ các file chứa trong `#include` 
 
