@@ -11,7 +11,7 @@ Quá trình tiền xử lý được gọi là `preprocessor` quá trình này c
 
 một dạng macro khác ví dụ hàm macro 
 
-`define Sum(a,b a+b `
+`define Sum(a,b) a+b `
 
 Vậy quá trình tiền xử lý có thể gồm các việc sau : 
 - Gán define, thay thế giá trị vào các chỗ gọi macro 
