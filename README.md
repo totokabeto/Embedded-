@@ -218,7 +218,6 @@ Tiếng Anh gọi là bitwise operator
 
 Các phép `&` thao tác được thực hiện cho các mã nhị phân và *tương tự như một phép nhân đại số*
 
-muốn giữ lại bit đầu tiên ta thường dùng `AND`
 
 ``0b1000000 & 0b10010001 = 10000000``
 
