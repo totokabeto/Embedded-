@@ -15,13 +15,13 @@ một dạng macro khác ví dụ hàm macro
 Vậy quá trình tiền xử lý có thể gồm các việc sau : 
 - Gán define, thay thế giá trị vào các chỗ gọi macro 
 - xóa comment 
-- copy file trong các thư mụ thư viện vào file `main.c `
+- copy file trong các thư mụ thư viện vào file `main.c`
 
 *Các ngôn ngữ bậc cao hơn như Python thì phải bao gồm thêm một bước biên dịch sang ngôn ngữ C trước khi đến bước tiền xử lý, nên tốc độ xử lý có thể chậm hơn* . Do đó ngôn ngữ C rất gần với ngôn ngữ máy 
 
--Qúa trình tiếp theo là quá trình compiler chuyển từ file main.i sang file main.s hay còn gọi là file assembly code
+-Qúa trình tiếp theo là quá trình compiler chuyển từ file `main.i` sang file `main.s` hay còn gọi là file assembly code
 
--Tiếp đó là quá trình Assembler chuyển thành file main.o hay main.obj tại bước này các file thư việc của âm thanh và hình ảnh sẽ được thêm vào 
+-Tiếp đó là quá trình Assembler chuyển thành file `main.o` hay `main.obj` tại bước này các file thư việc của âm thanh và hình ảnh sẽ được thêm vào 
 
 -Bước cuối cùng là Linker chuyển thành dạng file main.exe [đổi với Windows] để người dùng có thể run 
 
@@ -40,7 +40,7 @@ Phân vùng nhớ
 •	Text :
 – Quyền truy cập chỉ Read và nó chưa lệnh để thực thi nên tránh sửa đổi instruction.
 
-– Chứa khai báo hằng số trong chương trình (.rodata) vd : char * arr2 = “Hello” 
+– Chứa khai báo hằng số trong chương trình (.rodata) vd : `char * arr2 = “Hello”;`
 
 •	Data:
 
@@ -59,6 +59,7 @@ Phân vùng nhớ
 – Được giải phóng khi kết thúc chương trình.
 
 •	Stack:
+
 – Quyền truy cập là read-write.
 
 – Được sử dụng cấp phát cho biến local, input parameter của hàm,…
@@ -74,7 +75,7 @@ Phân vùng nhớ
 
 – Sẽ được giải phóng khi gọi hàm free,…
 
-ví dụ : uint8_t* ptr = (uint8_t*) malloc(sizeof(uint_8)*5);  Cấp phát động một mảng có giá trị là 5 byte. 
+ví dụ : `uint8_t* ptr = (uint8_t*) malloc(sizeof(uint_8)*5); ` Cấp phát động một mảng có giá trị là 5 byte. 
 
 Khởi tạo con trỏ để lưu địa chỉ biến đầu tiên, ép kiểu và hàm malloc trả về một con trỏ void. Con trỏ giá 
 
