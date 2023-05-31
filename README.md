@@ -3,26 +3,25 @@
 Vi xử lý có thể hoạt động là do cấu tạo bao gồm nhiều con transistor với nhau 
 
 có nhiều loại compiler : ví dụ `gcc`
-`define MAX 10` là một loại macro 
 
-Kiểu dữ liệu là gì ? 
+`define MAX 10` là một loại macro =>> Kiểu dữ liệu là gì ? 
 
 Quá trình tiền xử lý được gọi là `preprocessor` quá trình này chẳng qua là biên dịch lại file `.c` và `.h` [hay còn gọi là source file] sang dạng file `main.i` hay còng được gọi là `preprocessed source`, quá trình nãy cũng là copy toàn bộ các file chứa trong `#include` 
 
 một dạng macro khác ví dụ hàm macro 
 
-`define Sum(a,b a+b `
+`define Sum(a,b) a+b `
 
 Vậy quá trình tiền xử lý có thể gồm các việc sau : 
 - Gán define, thay thế giá trị vào các chỗ gọi macro 
 - xóa comment 
-- copy file trong các thư mụ thư viện vào file `main.c `
+- copy file trong các thư mụ thư viện vào file `main.c`
 
 *Các ngôn ngữ bậc cao hơn như Python thì phải bao gồm thêm một bước biên dịch sang ngôn ngữ C trước khi đến bước tiền xử lý, nên tốc độ xử lý có thể chậm hơn* . Do đó ngôn ngữ C rất gần với ngôn ngữ máy 
 
--Qúa trình tiếp theo là quá trình compiler chuyển từ file main.i sang file main.s hay còn gọi là file assembly code
+-Qúa trình tiếp theo là quá trình compiler chuyển từ file `main.i` sang file `main.s` hay còn gọi là file assembly code
 
--Tiếp đó là quá trình Assembler chuyển thành file main.o hay main.obj tại bước này các file thư việc của âm thanh và hình ảnh sẽ được thêm vào 
+-Tiếp đó là quá trình Assembler chuyển thành file `main.o` hay `main.obj` tại bước này các file thư việc của âm thanh và hình ảnh sẽ được thêm vào 
 
 -Bước cuối cùng là Linker chuyển thành dạng file main.exe [đổi với Windows] để người dùng có thể run 
 
@@ -41,7 +40,7 @@ Phân vùng nhớ
 •	Text :
 – Quyền truy cập chỉ Read và nó chưa lệnh để thực thi nên tránh sửa đổi instruction.
 
-– Chứa khai báo hằng số trong chương trình (.rodata) vd : char * arr2 = “Hello” 
+– Chứa khai báo hằng số trong chương trình (.rodata) vd : `char * arr2 = “Hello”;`
 
 •	Data:
 
@@ -60,6 +59,7 @@ Phân vùng nhớ
 – Được giải phóng khi kết thúc chương trình.
 
 •	Stack:
+
 – Quyền truy cập là read-write.
 
 – Được sử dụng cấp phát cho biến local, input parameter của hàm,…
@@ -75,7 +75,7 @@ Phân vùng nhớ
 
 – Sẽ được giải phóng khi gọi hàm free,…
 
-ví dụ : uint8_t* ptr = (uint8_t*) malloc(sizeof(uint_8)*5);  Cấp phát động một mảng có giá trị là 5 byte. 
+ví dụ : `uint8_t* ptr = (uint8_t*) malloc(sizeof(uint_8)*5); ` Cấp phát động một mảng có giá trị là 5 byte. 
 
 Khởi tạo con trỏ để lưu địa chỉ biến đầu tiên, ép kiểu và hàm malloc trả về một con trỏ void. Con trỏ giá 
 
@@ -115,7 +115,7 @@ khởi tạo file `main.i` trong VSCode : gcc -E main.c -o main.i
 
 `#define SUM(a,b) a+b`
 
-```
+```php
 #define CREATE_FUNC(ten_ham,noi_dung)   \ 
 
 void ten_ham(){                           \
@@ -143,7 +143,7 @@ Nhược điểm là size của file biên dịch sẽ lớn hơn vì macro đư
 
 tương tự như macro ở phía trên ta cũng có thể viết hàm SUM 
 
-```
+```php
 int SUM (int a, int b){
     return a+b; 
 }
@@ -172,7 +172,7 @@ Khi cấp nguồn khởi tạo địa chỉ đầu tiên là `0x00`  đồng th�
 
 => Khi thay đổi vị trí đột ngột không theo một quy luật nào , vdk sẽ luu địa chỉ tiếp theo vào `Stack Pointer` và tiếp tục đếm nhờ `Programe Counter` khi đếm hết thì lại tiếp tục quay lại vị trí địa chỉ cũ 
 
-```
+```php
 int main(){       0x01
                   0x02 
     while(1){     0x03 
@@ -218,7 +218,6 @@ Tiếng Anh gọi là bitwise operator
 
 Các phép `&` thao tác được thực hiện cho các mã nhị phân và *tương tự như một phép nhân đại số*
 
-muốn giữ lại bit đầu tiên ta thường dùng `AND`
 
 ``0b1000000 & 0b10010001 = 10000000``
 
@@ -316,7 +315,7 @@ struct typeDate
 ``` 
 *Tong cua structe ben tren la 12 bytes*
 
-```
+```php
 typedef struct 
 {
   uint8_t arr1[7]; // 2*3 + 1 + 1 byte bo nho dem 
@@ -397,7 +396,7 @@ Giả sử có 1 file global ở file test.c và muốn sử dụng nó ở file
 một hàm được extern có chứa biến static thì vẫn chạy được do biến static lúc đó nằm trong 1 hàm không phải static 
 
 
-# Pointer 
+# Bài 7 Pointer 
 
 Khi khởi tạo 1 biến thì biến được lưu vào RAM, đặc trưng bằng địa chỉ và giá trị địa chỉ 
 
