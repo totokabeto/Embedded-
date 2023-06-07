@@ -40,11 +40,13 @@ for (int i = 0; i < size;i++){
     printf("%d lan\n",count);
 }
 }
+void daoChuoi(uint8_t array[]){
 
+}
 
 int main(int argc, char const *argv[])
 {
-    uint8_t array1[] = {3,1,4,2,5,4,9,15,12};
+    uint8_t array1[] = {"mot hai ba bon, nam sau bay tam chin"};
     uint8_t size = sizeof(array1);
     sortList(array1,size);
     printArray(array1,size);
