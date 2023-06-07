@@ -19,29 +19,40 @@ int tinhCuocTaxi(int soKm){
 }
 
 bool kiemTraNamNhuan(int nam){
-if(nam % 4 == 0 && nam % 100 != 0){
-    return true;
-} else {
-    return false; 
-}
+   if (nam % 4 != 0) {
+        return 0;
+    } else if (nam % 100 != 0) {
+        return 1;
+    } else if (nam % 400 != 0) {
+        return 0;
+    } else {
+        return 1;
+    }
 }
 
 int demSoNamNhuan(int namBatDau, int namKetThuc){
     int soNamNhuan = 0; 
     for (int i = namBatDau; i < namKetThuc; i++)
     {
-    if(i % 4 == 0 && i % 100 != 0){
-    soNamNhuan++;
+     if (i % 4 == 0) {
+            if (i % 100 == 0) {
+                if (i % 400 == 0) {
+                    soNamNhuan++;
+                }
+            } else {
+                soNamNhuan++;
+            }
+        }
+         
     }
-    return soNamNhuan;
-    }
-    
+ return soNamNhuan;
+  
 }
 
 int tinhThu(int ngay, int thang , int nam){
 int tongSoNgay = 0; 
 int thu = 0;
-if (kiemTraNamNhuan(nam) == true){
+if (kiemTraNamNhuan(nam) == 1){
 switch (thang)
 {
 case 1:
@@ -86,10 +97,13 @@ default:
 // tính từ 1/1/1 thu hai đến nay đã bao nhiêu ngày 
 int soNamNhuan = demSoNamNhuan(1,nam);
 
-tongSoNgay = (nam -1)*365 + (soNamNhuan-1) + ngay - 1 ;
+tongSoNgay = (nam -1) * 365 + (soNamNhuan) + ngay - 1 ;
+
+printf("tong so ngay %d\n",tongSoNgay);
 thu = 2 + (tongSoNgay % 7);
 return thu; 
-} else {
+} 
+else {
 switch (thang)
 {
 case 1:
@@ -102,38 +116,39 @@ case 3:
     ngay = ngay + 31 + 28;
     break; 
 case 4: 
-    ngay = ngay + 31 + 29 + 31; 
+    ngay = ngay + 31 + 28 + 31; 
     break; 
 case 5 : 
-    ngay = ngay + 31 + 29 + 31 + 30;
+    ngay = ngay + 31 + 28 + 31 + 30;
 break; 
 case 6 :
-    ngay = ngay + 31 + 29 + 31 + 30 + 31;
+    ngay = ngay + 31 + 28 + 31 + 30 + 31;
 break;  
 case 7 :
-    ngay = ngay + 31 + 29 + 31 + 30 + 31+30;
+    ngay = ngay + 31 + 28 + 31 + 30 + 31+30;
 break;  
 case 8 :
-    ngay = ngay + 31 + 29 + 31 + 30 + 31+30+31;
+    ngay = ngay + 31 + 28 + 31 + 30 + 31+30+31;
 break;  
 case 9 : 
-    ngay = ngay + 31 + 29 + 31 + 30 + 31+30+31+31;
+    ngay = ngay + 31 + 28 + 31 + 30 + 31+30+31+31;
 break; 
 case 10: 
-    ngay = ngay + 31 + 29 + 31 + 30 + 31+30+31+31+30;
+    ngay = ngay + 31 + 28 + 31 + 30 + 31+30+31+31+30;
 break; 
 case 11: 
-    ngay = ngay + 31 + 29 + 31 + 30 + 31+30+31+31+30+31;
+    ngay = ngay + 31 + 28 + 31 + 30 + 31+30+31+31+30+31;
 break; 
 case 12: 
-    ngay = ngay + 31 + 29 + 31 + 30 + 31+30+31+31+30+31+30;
+    ngay = ngay + 31 + 28 + 31 + 30 + 31+30+31+31+30+31+30;
 break; 
 default:
     break;
 }
 int soNamNhuan = demSoNamNhuan(1,nam);
 
-tongSoNgay = (nam-1)*365 + soNamNhuan + ngay - 1;
+tongSoNgay = ((nam - 1) * 365 + soNamNhuan + ngay) - 1 ;
+
 thu = 2 + (tongSoNgay % 7);
 return thu; 
 }
@@ -144,6 +159,6 @@ int main(int argc, char const *argv[])
     int x = 13; 
     printf("so tien taxi la %lu VND\n",tinhCuocTaxi(x));
 
-    printf("thu cua ngay nhap vao la thu %d",tinhThu(6,1,1938));
+    printf("thu cua ngay nhap vao la thu %d",tinhThu(15,6,2016));
     return 0;
 }
