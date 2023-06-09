@@ -5,7 +5,7 @@
 
 int tinhCuocTaxi(int soKm){
     int isoTienCuoc = 0; 
-
+    
     if(soKm <= 15){
     isoTienCuoc = 14000*soKm; 
     }
