@@ -127,7 +127,7 @@ void ten_ham(){                           \
 
 *khi xuống dòng trong macro thì dùng dấu \ *
 
-```
+```C
 CREATE_FUNC(test,"this is test");
 int main(){
     test();
@@ -157,7 +157,7 @@ Khi vi điều khiển được cấp nguồn sẽ khởi tạo địa chỉ đ�
 Mỗi loại vi điều khiển thì có các loại như 8 bit , 16 bit , 32 bit , 64 bit. Mỗi loại vi điều khiển thì lại có một bước nhảy ví dụ vdk 8 bit có bước nhảy là 1 byte, vđk 16 bit thì bước nhảy là 2 byte v..v 
 
 *Lấy ví dụ vdk STM32* 
-```
+```C
 Khi cấp nguồn khởi tạo địa chỉ đầu tiên là `0x00`  đồng thời khởi tạo `Stack Pointer`
                                              
                                            `0x04` khởi tạo `Programe Counter`
@@ -172,7 +172,7 @@ Khi cấp nguồn khởi tạo địa chỉ đầu tiên là `0x00`  đồng th�
 
 => Khi thay đổi vị trí đột ngột không theo một quy luật nào , vdk sẽ luu địa chỉ tiếp theo vào `Stack Pointer` và tiếp tục đếm nhờ `Programe Counter` khi đếm hết thì lại tiếp tục quay lại vị trí địa chỉ cũ 
 
-```php
+```C
 int main(){       0x01
                   0x02 
     while(1){     0x03 
@@ -267,7 +267,7 @@ Tương tự như một phép cộng đại số
 
 ## Dịch trái <<
 
-```
+```C
 unsigned char a = 5; // 00000101
 
 unsigned char b = a << 4;> // 01010000
@@ -279,7 +279,7 @@ unsigned char b = a << 4;> // 01010000
 
 Sử dụng trong bài pinHigh, pinLow dùng enum 
 
-```
+```C
 void pinHigh(pins pin){
 
 PORTA = PORTA | (0b10000000 >> pin); 
@@ -305,7 +305,7 @@ Qúa trình này gọi là structure padding
 
  *Example*
 
-```
+```C
 struct typeDate
 {
     uint8_t ngay; // 1 byte + 3 byte bo nho dem 
@@ -315,7 +315,7 @@ struct typeDate
 ``` 
 *Tong cua structe ben tren la 12 bytes*
 
-```php
+```C
 typedef struct 
 {
   uint8_t arr1[7]; // 2*3 + 1 + 1 byte bo nho dem 
@@ -324,7 +324,7 @@ typedef struct
 // 18 byte 
 ```
 
-```
+```C
 typedef struct 
 {
     uint64_t arr1[6];
@@ -343,7 +343,7 @@ Các member được lưu vào cùng một địa chỉ- địa chỉ dùng chun
 
 Kich thuoc cua union la kich thuoc cua member lớn nhất 
 
-```
+```C
 typedef union 
 {
     uint8_t test1[5];
@@ -362,7 +362,7 @@ Biến static cục bộ được khởi tạo một làn và tồn tại hết 
 
 *ví dụ* 
 
-```
+```C
 void test(){
     static int a = 10; 
     printf("a = %d\n",a); 
@@ -419,7 +419,7 @@ bản thân hàm cũng có địa chỉ
 
 khởi tạo con trỏ hàm 
 
-```
+```C
 void (*ptr)(int,int) = NULL;
 ptr = &tong;
 ptr(9,17);
@@ -428,7 +428,7 @@ ptr(9,17);
 Kiểu dữ liệu của hàm (tên con trỏ)(input parameter)
 
 Thông qua con trỏ hàm, có thể dùm hàm để làm input parameter của hàm khác 
-```
+```C
 void tong(int a, int b){
     printf("Tong cua %d và %d la %d ",a,b,a+b);
 }
@@ -444,7 +444,7 @@ void tinhToan(int a,int b, void (*ptr)(int,int )){
 Có thể trỏ đến mọi địa chỉ 
 
 Chỉ trỏ đến được thôi còn in ra thì không được 
-```
+```C++
  int i = 10; 
 
     double d = 15.6; 
@@ -472,7 +472,7 @@ Chỉ trỏ đến được thôi còn in ra thì không được
 `int* ptr = 10;` bản chất của nó cũng là biến nên cũng sẽ có địa chỉ và giá trị 
 
 `int **ptp = 0xc1;` pointer to pointer là con trỏ lưu địa chỉ của con trỏ 
-```
+```C++
 int a = 15; 
 
 int *ptr2 = &a; 
@@ -481,3 +481,294 @@ int **ptp = &ptr2;
 
 printf("test : %d \n",**ptp);
 ```
+
+# B9Class
+
+Để sử dụng ngôn ngữ C++ phải sử dụng thư viện `<iostream>`
+
+`class` là một kiểu dữ liệu do người dụng tự định nghĩa 
+
+```C++
+class SinhVien
+{ 
+public: 
+    //SinhVien(int lop, int tuoi); // constructor có input parameters 
+    void themThongTin(int lop, int tuoi);
+    void hienThi(); 
+protected:
+    static int bhyt; 
+    int lop; 
+    int tuoi; 
+};
+```
+các biến được khai báo trong class được gọi là các `property` và các hàm được khai báo trong class được gọi 
+là các `method` 
+
+Code phía trên được gọi là header form và được khai báo trong file header vd: sinhvien.hpp, chỉ khởi tạo các prototype còn các code của các method thì nằm ở file source. 
+
+```C++
+void SinhVien::hienThi(){
+cout << "Sinh vien nay thuoc lop " << SinhVien::lop << endl;
+cout << "Tuoi : " << SinhVien::tuoi << endl; 
+}
+```
+
+Sự khác biệt giữa class và struct là struct không thể tạo các hàm, chỉ có thể định nghĩa hàm. 
+
+`public`, `private` , `protected` được gọi là phạm vi truy cập 
+## Phạm vi truy cập 
+
+### Private 
+
+Member ở trong phạm vi truy cập private thì chỉ các phương thức trong class chính nó thì mới truy cập được còn đối với object hoặc class kế thừa thì không. 
+
+Ví dụ : 
+
+```C++
+public: 
+void themThongTin(int tuoi,int lop);
+private: 
+    int tuoi; 
+    int lop; 
+
+void SinhVien::themThongTin(int tuoi,int lop){
+    SinhVien::tuoi = tuoi; 
+    SinhVien::lop = lop; 
+}
+
+```
+
+## Constructor 
+
+Hàm khởi tạo là hàm có tên trùng với tên class, code đầu tiên, nằm ở phạm vi truy cập public, có thể có input parameters hoặc không. 
+
+```C++
+class SinhVien{
+SinhVien(int tuoi, int lop);
+SinhVien();
+SinhVien(int tuoi = 5, int lop = 16);
+};
+
+SinhVien::SinhVien(){
+
+}
+
+int main(){
+    SinhVien sv {16,4};
+    // nếu không khai báo input parameter sẽ lấy mặc định như khai báo bên trên là tuoi = 5 và lop = 16; 
+}
+
+```
+
+## Tính kế thừa Inheritance 
+
+Có thể tạo ra một class con kế thừa từ class chính 
+
+```C++
+class SinhVien: public DoiTuong{
+
+}
+```
+
+Tuy nhiên để kế thừa được các property được khai báo trong class chính thì phải dùng từ khóa protected thay vì private. 
+
+Ngoài ra có thể khai báo nhiều hàm trùng tên với class chính nhưng khác input parameter. 
+Đây gọi là nạp chông phương thức. 
+```C++
+class SinhVien
+{ 
+public: 
+    //SinhVien(int lop, int tuoi); // constructor có input parameters 
+    void themThongTin(int lop, int tuoi);
+    void hienThi(); 
+protected:
+    static int bhyt; 
+    int lop; 
+    int tuoi; 
+};
+
+class DoiTuong: public SinhVien {
+public: 
+//nap chong phuong thuc 
+    
+    void themThongTin(int lop, int tuoi, int mssv, string ten); 
+    void hienThi();
+private: 
+    int mssv; 
+    string ten; 
+};
+
+void DoiTuong::themThongTin(int lop, int tuoi, int mssv, string ten){
+SinhVien::lop = lop; 
+SinhVien::tuoi = tuoi; 
+DoiTuong::mssv = mssv; 
+DoiTuong::ten = ten; 
+}
+```
+*Các property được khai báo trong một class có địa chỉ trên RAM khác nhau*
+
+## Biến static trong clas 
+
+Biến static trong class có chung một địa chỉ khởi tạo và tồn tại hết vòng đời chương trình. 
+
+Khai báo trước trong form sau đó khởi tạo bên ngoài 
+```C++
+class SinhVien
+{ 
+public: 
+    //SinhVien(int lop, int tuoi); // constructor có input parameters 
+    void themThongTin(int lop, int tuoi);
+    void hienThi(); 
+protected:
+    static int bhyt; 
+    int lop; 
+    int tuoi; 
+};
+    int SinhVien::bhyt = 10; 
+
+```
+# B10 OOP 
+
+## Tính đa hình 
+
+tính đa hình có thể tóm gọn lại là chúng ta có thể tạo nhiều hàm giống nhau (trùng tên) nhưng khác input paramter 
+
+```C++
+public:
+    void tong(int a,int b);
+    void tong(int a,int b, int c);
+    int tong(int a, double b);
+
+```
+
+### Template 
+
+Template một từ khóa trong C++, và là một kiểu dữ liệu trừu tượng tổng quát hóa cho các kiểu dữ liệu int, float, double, bool...
+
+```C++
+template <typename var , typename varb> 
+varb tong(var a, varb b){
+    return (varb)a+b;
+}
+```
+
+## Tính trừu tượng 
+
+Tính trừu tượng trong OOP nghĩa là chỉ khai báo các hàm cần thiết vd : setter , getter để người dùng sử dụng chứ không khai báo các hàm không cần thiết, phức tạp mà người dùng không quan tâm 
+
+```C++
+public: 
+void nhapABC(); -> Người dùng quan tâm và dễ sử dụng 
+void getX1X2();
+private: 
+int getdelTa(); -> Chương trình phức tạp người dùng không quan tâm 
+```
+
+## Namespace 
+
+Namespace là từ khóa để định nghĩa một phạm vi nhằm mục đích phân biệt các hàm lớp biến trùng tên trong các file khác nhau 
+
+```C++
+namespace conOngA{
+    int A = 10;
+}
+namspace conOngB{
+    int A = 10;
+}
+``` 
+
+LƯU ý : khi 1 namespace tồn tại ở nhiều file thì cũng không được trùng tên với nhau nhưng các biến thì có thể trùng tên với nhau. 
+
+# B11 Vector 
+
+## Vector 
+
+Vector cũng là một kiểu dữ liệu do người dùng tự định nghĩa , sử dụng thư viện <vector>
+
+khai báo vector : 
+
+`vector <int> array` 
+
+Các hàm thông dụng : 
+
+array.push_back(4); -> thêm một phần tử ở phía sau vector 
+
+array.size() -> trả về kích thước vector
+
+array.pop_back() -> xóa phần tử phía sau cùng vector 
+
+array.insert(array.begin() + 2, 7);
+
+thêm phần tử vào vị trí thứ hai, hàm array.begin() trả về địa chỉ đầu tiên 
+
+*Bản chất vector hoạt động dựa trên cấp phát động nên khi dùng xong ta phải thu hồi vùng nhớ* 
+
+array.clear();
+
+array.erase(arra.begin()+2); -> xóa phần tử theo địa chỉ 
+
+array.assign(8,5); -> tạo ra một vector có 5 phần tử và gán giá trị bằng 8.
+
+## foreach 
+
+Từ C++11, có thể sử dụng hàm for sau đây thay cho cách duyệt mảng truyền thống 
+```C++
+for (int item : array){
+    cout << "item : " << item << endl; 
+}
+```
+
+## auto 
+
+khi khai báo biến mà không xác định được kiểu dữ liệu thì dùng từ khóa auto sẽ tự kiểm tra dữ liệu được gán là kiểu dữ liệu nào thì nó tự động là kiểu dữ liệu đó, kể cả con trỏ . 
+
+``` c++
+int a = 10; 
+auto data = &a; 
+```
+
+## List 
+
+Sử dụng list trong thư viện <list>, list cũng có các method hỗ trợ như vector nhưng về bản chất thì lại khác 
+ 
+Đổi với một mảng thông thường thì các địa chỉ được sắp liên tiếp nhau
+
+ <img src="https://qph.cf2.quoracdn.net/main-qimg-1ad4195983129d094e130cbf0fe6cc30">
+
+Tuy nhiên có một kiểu dữ liệu khác là list cho phép chúng ta tạo ra một mảng ảo, với node trước sẽ lưu địa chỉ của node sau, node cuối cùng là null 
+
+ <img src="https://www.iro.umontreal.ca/~pift1025/bigjava/Ch20/images/linked_insert.png">
+
+```c++
+ typdef struct {
+    int value; 
+    node * next; 
+ }node; 
+ ```
+
+ So sánh : 
+
+ mảng thông thường cho phép tốc độ sử lý nhanh , do các địa chỉ liền kề nhau, tuy nhiên nếu phải thêm một phần tử bất kỳ nào đó khiến mảng phải dời ra sau nhiều lần, xử lý chậm hơn do phải thực hiện nhiều lần. 
+
+ - Linked list thêm 1 node vào rất dễ dàng, tuy nhiên nếu duyệt thì cũng phải tốn nhiều bước hơn, đọc giá trị rồi đọc địa chỉ của node kế tiếp, chậm hơn so với duyệt liên tiếp các địa chỉ liền kề 
+
+ ## Map 
+
+ map cũng là một kiểu dữ liệu do người dùng định nghĩa, map bao gồm 2 phần key và value đi chung với nhau 
+
+key và value có thể là nhiều kiểu dữ liệu khác nhau như string, int, double , ... 
+
+
+```c++
+map <string, int> Sinhvien; 
+
+    Sinhvien["ID"] = 101;
+    Sinhvien["Lop"] = 7; 
+    Sinhvien["Tuoi"] = 13; 
+
+    for (auto item : Sinhvien){
+        cout << " Key : " << item.first.c_str() << " Value : " << item.second << endl; 
+    }
+```
+
+

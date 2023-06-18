@@ -30,28 +30,20 @@ bool kiemTraNamNhuan(int nam){
     }
 }
 
-int demSoNamNhuan(int namBatDau, int namKetThuc){
-    int soNamNhuan = 0; 
-    for (int i = namBatDau; i < namKetThuc; i++)
-    {
-     if (i % 4 == 0) {
-            if (i % 100 == 0) {
-                if (i % 400 == 0) {
-                    soNamNhuan++;
-                }
-            } else {
-                soNamNhuan++;
-            }
+int demSoNamNhuan(int start_year, int end_year) {
+    int count = 0;
+    for (int year = start_year; year < end_year; year++) {
+        if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
+            count++;
         }
-         
     }
- return soNamNhuan;
-  
+    return count;
 }
 
 int tinhThu(int ngay, int thang , int nam){
 int tongSoNgay = 0; 
 int thu = 0;
+
 if (kiemTraNamNhuan(nam) == 1){
 switch (thang)
 {
@@ -99,11 +91,12 @@ int soNamNhuan = demSoNamNhuan(1,nam);
 
 tongSoNgay = (nam -1) * 365 + (soNamNhuan) + ngay - 1 ;
 
-printf("tong so ngay %d\n",tongSoNgay);
+
 thu = 2 + (tongSoNgay % 7);
 return thu; 
 } 
 else {
+
 switch (thang)
 {
 case 1:
@@ -120,34 +113,34 @@ case 4:
     break; 
 case 5 : 
     ngay = ngay + 31 + 28 + 31 + 30;
-break; 
+    break; 
 case 6 :
     ngay = ngay + 31 + 28 + 31 + 30 + 31;
-break;  
+    break;  
 case 7 :
-    ngay = ngay + 31 + 28 + 31 + 30 + 31+30;
-break;  
+    ngay = ngay + 31 + 28 + 31 + 30 + 31 + 30;
+    break;  
 case 8 :
-    ngay = ngay + 31 + 28 + 31 + 30 + 31+30+31;
-break;  
+    ngay = ngay + 31 + 28 + 31 + 30 + 31 + 30 + 31;
+    break;  
 case 9 : 
-    ngay = ngay + 31 + 28 + 31 + 30 + 31+30+31+31;
-break; 
+    ngay = ngay + 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31;
+    break; 
 case 10: 
-    ngay = ngay + 31 + 28 + 31 + 30 + 31+30+31+31+30;
-break; 
+    ngay = ngay + 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31 + 30;
+    break; 
 case 11: 
-    ngay = ngay + 31 + 28 + 31 + 30 + 31+30+31+31+30+31;
-break; 
+    ngay = ngay + 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31 + 30 + 31;
+    break; 
 case 12: 
-    ngay = ngay + 31 + 28 + 31 + 30 + 31+30+31+31+30+31+30;
-break; 
+    ngay = ngay + 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31 + 30 + 31 + 30;
+    break; 
 default:
     break;
 }
 int soNamNhuan = demSoNamNhuan(1,nam);
 
-tongSoNgay = ((nam - 1) * 365 + soNamNhuan + ngay) - 1 ;
+tongSoNgay = (nam - 1) * 365 + soNamNhuan + ngay - 1 ;
 
 thu = 2 + (tongSoNgay % 7);
 return thu; 
@@ -159,6 +152,6 @@ int main(int argc, char const *argv[])
     int x = 13; 
     printf("so tien taxi la %lu VND\n",tinhCuocTaxi(x));
 
-    printf("thu cua ngay nhap vao la thu %d",tinhThu(15,6,2016));
+    printf("thu cua ngay nhap vao la thu %d",tinhThu(9,11,1911));
     return 0;
 }
