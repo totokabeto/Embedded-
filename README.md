@@ -770,5 +770,13 @@ map <string, int> Sinhvien;
         cout << " Key : " << item.first.c_str() << " Value : " << item.second << endl; 
     }
 ```
+# B12 Hàm ảo Virtual function 
 
+Khi 2 hàm giống nhau được gọi trực tiếp từ hàm main mà không có từ khóa virtual để phân biệt thì luôn được gọi từ class cha, khi thêm từ khóa virtual vào thì chương trình sẽ biết mà load lại địa chỉ từ class con. 
+
+Từ khóa virtual cũng như thông báo cho PC xem class con có ghi đè hàm hay không. 
+
+2 hàm trùng tên tồn tại ở cả class con và class cha thì được gọi là ghi đè (overide)
+
+Khi class con có hàm trùng tên và được gọi từ main thì sẽ load lại địa chỉ từ class con (overloading)
 
