@@ -3,11 +3,9 @@
 #include <stdint.h> 
 
 
-
-
-bool isEqual(  const char arr1[], const char arr2[]){
+bool isEqual(const char arr1[], const char arr2[]){
 int i = 0;
-while (arr1[i]==arr2[i])
+while (arr1[i] == arr2[i])
 {
     if(arr1[i] == '\0'){
         return true; 
@@ -15,8 +13,6 @@ while (arr1[i]==arr2[i])
     i++;
 }
 return false;
-
-
 }
 
 

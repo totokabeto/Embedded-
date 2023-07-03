@@ -127,7 +127,7 @@ typeLevel SinhVien::getLevel(){
  
 class Menu : public SinhVien {
     private:
-   vector<SinhVien>dataBase;
+     vector<SinhVien>dataBase;
     public:
     void studentAdd();
     void displayDataBase(); 
@@ -319,13 +319,11 @@ int main(int argc, char const *argv[])
         menu0.sortByName();
         break;
     case 7: 
-     menu0.displayDataBase();
+        menu0.displayDataBase();
         break; 
     case 0: 
         return 0; 
     }
-   
-
 }
   /*
     SinhVien sv {"khanh",1,12,1,2,3}; 
