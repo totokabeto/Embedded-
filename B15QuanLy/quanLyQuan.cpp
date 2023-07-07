@@ -2,7 +2,10 @@
 #include <vector> 
 
 using namespace std; 
-
+typedef enum{
+    QUAN_LY = 1,
+    NHAN_VIEN,
+}typeSelection;
 class QuanLy {
     protected: 
     int id; 
@@ -13,11 +16,11 @@ class QuanLy {
     vector<QuanLy> listFood;
     QuanLy(int id, string tenMon, int price); 
     QuanLy(); 
+    void themMon(); 
     void setTen(string tenMon); 
     void setGia(int price);
     string getTenMon(); 
     int getGiaMon(); 
-    void themMon(); 
     void suaTenMon(int ID); 
     void suaGiaMon(int ID);  
     void xoaMon(); 
@@ -259,7 +262,7 @@ int main(int argc, char const *argv[])
     cin >> input;
     switch (input)
     {
-    case 1:
+    case QUAN_LY:
         H: 
         int input2; 
         cout << "1.Them mon " << endl; 
@@ -335,7 +338,7 @@ int main(int argc, char const *argv[])
             break;
         }
         break;
-    case 2: 
+    case NHAN_VIEN: 
         if(ql1.getSoBan() == 0){
             cout << "Vui long nhap so ban co dinh truoc khi cho khach hang goi mon tai ban " << endl; 
             goto L; 

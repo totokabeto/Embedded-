@@ -137,7 +137,6 @@ class Menu : public SinhVien {
     void sortByGPA(); 
     void sortByName(); 
 };
-
 void Menu::studentAdd(){
         string name; 
         int gender; 

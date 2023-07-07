@@ -1,117 +1,58 @@
-/*
-* File: string_compare.c
-* Author: Le Ngoc Hau
-* Date: 28/6/2023
-* Description: This file to do exercise with string or arr of char
-*/
+#include <iostream>
+using namespace std;
 
-#include <stdio.h>
-#include <stdbool.h>
-#include <stdint.h>
+int main() {
+   int choice1, choice2;
 
+   do {
+      cout << "===== MENU CHINH =====\n";
+      cout << "1. Lua chon 1\n";
+      cout << "2. Lua chon 2\n";
+      cout << "3. Hien thi menu con\n";
+      cout << "0. Thoat\n";
+      cout << "Nhap lua chon cua ban: ";
+      cin >> choice1;
 
-//so sanh 2 chuoi
-//char arr1[] = "Hello"; char arr2[] = "This is test"
-
-typedef enum{
-    SMALLER,
-    EQUAL,
-    BIGGER
-}Compare;
-
-struct Word{
-    int length;
-    char* addr;
-}word;
-
-/*
-* Function: isEqual 
-* Description: This function compare 2 string whether it is equal 
-* Input:
-*   arr1[] - an array of char
-*   arr2[] - an array of char
-* Output:
-*   returns whether string1 == string2
-*/
-bool isEqual(const char arr1[], const char arr2[])
-{
-    uint8_t i = 0;
-
-    while(arr1[i] == arr2[i])
-    {
-        if(arr1[i] == '\0') return true;
-        i++;
-    }
-    return false;
-}
-
-/*
-* Function: compare_String
-* Description: This function compare 2 string
-* Input:
-*   arr1[] - an array of char
-*   arr2[] - an array of char
-* Output:
-*   returns EQUAL, SMALLER or BIGGER
-*/
-
-
-/*
-* Function: revert_string
-* Description: This function revert word in string
-* Input:
-*   arr1[] - an array of char
-* Output:
-*   revert string
-*/
-void revert_string(const char arr1[])
-{
-    int string_length = 0;
-    
-    while(arr1[string_length] != '\0')
-    {
-        string_length++;
-    }
-
-    int word_length = 0;
-    char arr2[string_length - 1];
-
-    for(int index = string_length - 1; index >= 0; index--)
-    {
-        word_length ++ ;    
-        if(arr1[index] == ' ')
-        {
-            for(int k = 0; k <= word_length; k++)
-            {
-                arr2[string_length - (index + (word_length - k))] = arr1[index + 1 + k];
-            }
-            word_length = 0;
-        }
-        if(index == 0)
-        {
-            for(int k = 0; k <= word_length; k ++)
-            {
-                arr2[string_length - (index + (word_length - k))] = arr1[index + k];
-            }
+      switch (choice1) {
+         case 1:
+            cout << "Ban da chon lua chon 1.\n";
             break;
-        }
-    }
-    
-    for(int i = 0; i < string_length; i++)
-    {
-        printf("%c", arr2[i]);
-    }
-}
+         case 2:
+            cout << "Ban da chon lua chon 2.\n";
+            break;
+         case 3:
+            do {
+               cout << "===== MENU CON =====\n";
+               cout << "1. Lua chon 1\n";
+               cout << "2. Lua chon 2\n";
+               cout << "0. Quay lai menu chinh\n";
+               cout << "Nhap lua chon cua ban: ";
+               cin >> choice2;
 
-int main(int argc, char const *argv[])
-{
-    const char arr1[] = "Thai exporters are halving the time it takes to deliver durian to China, from 8 days to four days, in order to better compete with Vietnam over the pungent fruit.";
-    const char arr2[] = "Hello World Hau";
-    const char arr3[] = "Hello World";
+               switch (choice2) {
+                  case 1:
+                     cout << "Ban da chon lua chon 1 trong menu con.\n";
+                     break;
+                  case 2:
+                     cout << "Ban da chon lua chon 2 trong menu con.\n";
+                     break;
+                  case 0:
+                     cout << "Quay lai menu chinh.\n";
+                     break;
+                  default:
+                     cout << "Lua chon khong hop le. Vui long nhap lai.\n";
+                     break;
+               }
+            } while (choice2 != 0);
+            break;
+         case 0:
+            cout << "Ban da chon thoat chuong trinh.\n";
+            break;
+         default:
+            cout << "Lua chon khong hop le. Vui long nhap lai.\n";
+            break;
+      }
+   } while (choice1 != 0);
 
-    //printf("test: %d\n", compare_String(arr2, arr3));
-
-    revert_string(arr1);
-
-    return 0;
+   return 0;
 }
