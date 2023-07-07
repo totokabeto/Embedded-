@@ -48,6 +48,7 @@ string MonAn::getTen(){
 double MonAn::getGia(){
     return MonAn::gia; 
 }
+
 class QuanLy{
 private: 
 int SOBAN;
@@ -56,7 +57,7 @@ void suaMon();
 void xoaMon(); 
 void nhapSoBan();
 public:
-list<MonAn>DATABASE; 
+list<MonAn>DATABASE;
 QuanLy();
 list<MonAn> getDatabase();
 int getSoBan(); 
@@ -151,7 +152,7 @@ void QuanLy::managerMenu(){
     }
     }
 }
-class thongTinBan : public QuanLy{
+class thongTinBan{
 private: 
     int SO_BAN;
     bool TRANG_THAI;
@@ -166,7 +167,7 @@ public:
     bool getTrangThai(); 
     void setTrangThai();
     void getDanhSachMon();
-    void themMon(int id, int SO_LUONG);
+    void themMon(list<MonAn> database , thongTinBan a);
     void suaMon(int id, int SO_LUONG);
     void xoaMon(int id);
 
@@ -204,22 +205,27 @@ void thongTinBan::xoaMon(int id){
         position++; 
     }
 }
-void thongTinBan::themMon(int id, int soLuong){
-    cout << "Nhap vao id mon can them " << endl; 
+void thongTinBan::themMon(list<MonAn> database, thongTinBan a){
+    int id; 
+    int soLuong;
+    cout << "Nhap vao id mon can them : " << endl; 
     cin >> id; 
-    for (auto item : DATABASE){
+    for (auto item : database){
         if(item.getID() == id){
             cout << "ID co ton tai, tiep tuc nhap so luong mon " << endl; 
-            cout << "Nhap vao so luong mon " << endl; 
+            cout << "Nhap vao so luong mon : " << endl; 
             cin >> soLuong; 
             TypeMon newMon{item,soLuong};
             DATABASE_MON_AN.push_back(newMon);
-            cout << "Them mon tai ban thanh cong ";  
-        } else {
-            cout << "ID khong ton tai " << endl; 
+            cout << "Them mon tai ban thanh cong ! " << endl;  
+            if (a.getTrangThai() == false){
+                a.setTrangThai();
+        } else { 
+            cout << "ID khong ton tai " << endl;
             return;
         }
     }
+}
 }
 void thongTinBan::suaMon(int id, int soLuong){
     cout << "Nhap vao id mon can sua  : " << endl;
@@ -231,10 +237,11 @@ void thongTinBan::suaMon(int id, int soLuong){
             item.SO_LUONG = soLuong;
             cout << "Thay doi so luong mon thanh cong " << endl; 
         } else {
-            cout << "ID khong ton tai ! " <<endl; 
-            return; 
+        cout << "ID khong ton tai ! " <<endl; 
         }
     } 
+   
+
 }
 class NhanVien{
     private: 
@@ -250,19 +257,26 @@ NhanVien::NhanVien(list<MonAn> database, int SO_BAN){
     if(SO_BAN == 0 && DATABASE_MON_AN.size() == 0){
         cout << "Ban chua nhap danh sach mon an va setup so ban " << endl; 
         return;
-    } else{
+    } 
+    else
+    {
     DATABASE_MON_AN.assign(database.begin(),database.end());
     for (int i = 1; i <= SO_BAN; i++)
     {
         thongTinBan ban(i,false); 
         DATABASE_BAN.push_back(ban); 
     }
+    for (auto item : DATABASE_BAN){
+        cout << "So ban : " << item.getSoBan() << endl;
+        cout << "Trang thai:  " << item.getTrangThai() << endl; 
+    }
     int soBanGoiMon; 
     cout << "Nhap vao so ban muon goi mon " << endl; 
     cin >> soBanGoiMon; 
     for (auto item : DATABASE_BAN){
-        if (item.getSoBan() == soBanGoiMon){
+        if (soBanGoiMon == item.getSoBan()){
             int inputTaiBan; 
+            cout << "----------------------------------------Menu Nhan Vien ----------------------------------------" << endl; 
             cout << "1.Them mon tai ban " << endl; 
             cout << "2.Sua mon tai ban " <<endl; 
             cout << "3.Xoa mon tai ban " << endl; 
@@ -273,29 +287,21 @@ NhanVien::NhanVien(list<MonAn> database, int SO_BAN){
             cin >> inputTaiBan; 
             switch (inputTaiBan)
             {
-            case 1:{
-                for (auto item : database){
-                    item.getDanhSachMon(); 
+            case 1:
+                for (auto item_Mon : database){
+                    item_Mon.getDanhSachMon(); 
                 }
-                int id; 
-                int soLuong;
-                item.themMon(id,soLuong); 
+                item.themMon(database, item); 
                 break;
-            }
             case 2: 
-                for (auto item : database){
-                    item.getDanhSachMon(); 
-                }
-                uint8_t id2; 
-                uint8_t soLuong2;
-                item.suaMon(id2,soLuong2); 
+                for (auto item_Mon : database){
+                    item_Mon.getDanhSachMon(); 
+                } 
                 break;
             case 3: 
-                for (auto item : database){
-                    item.getDanhSachMon(); 
-                }
                 int id3; 
                 item.xoaMon(id3);
+                break;
             case 4: 
                 item.getDanhSachMon(); 
                 break; 
@@ -306,10 +312,13 @@ NhanVien::NhanVien(list<MonAn> database, int SO_BAN){
             default:
                 break;
             }
+        } else { 
+            cout << "So ban ko hop le " << endl; 
+            return; 
         }
     }
-    }
-    }
+}
+}
 int main(int argc, char const *argv[])
 {   QuanLy ql1;
     while(true){
