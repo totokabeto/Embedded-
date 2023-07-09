@@ -127,7 +127,7 @@ typeLevel SinhVien::getLevel(){
  
 class Menu : public SinhVien {
     private:
-     vector<SinhVien>dataBase;
+     list<SinhVien>dataBase;
     public:
     void studentAdd();
     void displayDataBase(); 

@@ -5,7 +5,7 @@ using namespace std;
 
 int main(int argc, char const *argv[])
 {
-    vector<int> array; 
+    list<int> array; 
     array.push_back(4);
     array.push_back(5);
     array.push_back(6);

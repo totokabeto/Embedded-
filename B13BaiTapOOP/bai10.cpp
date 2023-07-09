@@ -29,7 +29,7 @@ void Book::informationPrint(){
     cout << "Nam phat hanh : " << publishYear << endl; 
     cout << "So luong : " << number << endl; 
 }
-vector<Book> dataBase; 
+list<Book> dataBase; 
 void Book::addBook(){
     string name; 
     string author; 

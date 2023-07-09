@@ -13,7 +13,7 @@ class QuanLy {
     int soBan;
     int price; 
     public: 
-    vector<QuanLy> listFood;
+    list<QuanLy> listFood;
     QuanLy(int id, string tenMon, int price); 
     QuanLy(); 
     void themMon(); 
@@ -135,7 +135,7 @@ class Order: public QuanLy{
     int soBan; 
     bool trangThai; 
     public:
-    vector<Order> orderList; 
+    list<Order> orderList; 
     Order(int id, int soluong, int soBan, bool trangThai);
     Order(); 
     int getIDMonTaiBan(); 
@@ -205,7 +205,6 @@ void Order::xoaMonSaiID(int id){
             orderList.erase(orderList.begin() + i);
         }
     }
-    
 }
 void Order::suaMonTaiBan(int soBan){
     int id; 
