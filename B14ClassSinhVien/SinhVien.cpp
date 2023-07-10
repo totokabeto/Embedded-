@@ -30,7 +30,6 @@ class SinhVien{
 
     public: 
     SinhVien(){
-
     }
     SinhVien (string name, int gender, int age, double mathScore, double physicScore, double chemicScore){
         SinhVien::name = name; 

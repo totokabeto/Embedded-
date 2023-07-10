@@ -11,8 +11,10 @@
 using namespace std; 
 
 typedef enum{
-    MANAGER = 1,
-    EMPLOYEE, 
+    EXIT,
+    MANAGER ,
+    EMPLOYEE,
+    
 }SelectionChoice;
 
 typedef enum{
@@ -41,6 +43,8 @@ typedef enum{
     EDITNAME = 1,
     EDITPRICE,
 }EditMenuChoice; 
+
+
 /**********************************Class Dish*********************************/
 
 class Dish{
@@ -783,8 +787,11 @@ void programRun(){
         l_newEmployee.employeeMenu(l_newManager.getDishListData(),l_newManager.getNumberOfTable());
         break;
     }
-    default: 
+    case EXIT:
+        cout << "EXITING......." << endl; 
         exit(0);
+    default: 
+        break; 
     }
     }
 }
