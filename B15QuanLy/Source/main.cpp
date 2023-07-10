@@ -8,6 +8,11 @@
 #include "..\Header\Manager.hpp"
 #include "..\Header\Employee.hpp"
 #include "..\Header\global.hpp"
+#include "Dish.cpp"
+#include "Employee.cpp"
+#include "Manager.cpp"
+#include "TableInformation.cpp"
+
 /*
 * Function: programRun
 * Description: This function use for initializing the first main menu. 
@@ -38,8 +43,11 @@ void programRun(){
         l_newEmployee.employeeMenu(l_newManager.getDishListData(),l_newManager.getNumberOfTable());
         break;
     }
-    default: 
+    case EXIT:
+        cout << "EXITING......." << endl; 
         exit(0);
+    default: 
+        break;
     }
     }
 }

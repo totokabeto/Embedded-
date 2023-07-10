@@ -8,7 +8,8 @@
 #define GLOBAL_HPP
 
 typedef enum{
-    MANAGER = 1,
+    EXIT,
+    MANAGER,
     EMPLOYEE, 
 }SelectionChoice;
 

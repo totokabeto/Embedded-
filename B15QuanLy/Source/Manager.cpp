@@ -9,6 +9,51 @@
 Manager::Manager(){
    this->numberOfTable = 0; 
 }
+
+/*
+* Class: Manager
+* Function: managerMenu
+* Description: This function use for displaying the menu console
+* Input:
+*   none
+* Output:
+*   return: none
+*/
+void Manager::managerMenu(){
+    int keyInput; 
+        cout << "-----------------------------------------Manager Menu----------------------------------" << endl;
+        cout << "1.Adding dish " << endl; 
+        cout << "2.Edit dish " << endl; 
+        cout << "3.Delete dish " << endl; 
+        cout << "4.Dish list " << endl; 
+        cout << "5.Set fixed number of table " << endl; 
+        cout << "0.Return " << endl;
+        cout << "Your choice : " << endl; 
+        cin >> keyInput;
+    switch ((ManagerMenuChoice)keyInput)
+    {
+    case ADDDISH:
+        addDish();
+        break;
+    case EDITDISH: 
+        editDish(); 
+        break; 
+    case DELETEDISH: 
+        deleteDish(); 
+        break; 
+    case LISTSHOW: 
+        displayDishList(); 
+        break; 
+    case SETTABLENUM: 
+        setNumberOfTable(); 
+        break; 
+    case RETURN: 
+        return; 
+    default:
+        break;
+    }
+}
+
 /*
 * Class: Manager
 * Function: setNumberOfTable
@@ -176,48 +221,5 @@ void Manager::deleteDish(){
             dishListData.erase(position); 
         }
         position++;
-    }
-}
-/*
-* Class: Manager
-* Function: managerMenu
-* Description: This function use for displaying the menu console
-* Input:
-*   none
-* Output:
-*   return: none
-*/
-void Manager::managerMenu(){
-    int keyInput; 
-        cout << "-----------------------------------------Manager Menu----------------------------------" << endl;
-        cout << "1.Adding dish " << endl; 
-        cout << "2.Edit dish " << endl; 
-        cout << "3.Delete dish " << endl; 
-        cout << "4.Dish list " << endl; 
-        cout << "5.Set fixed number of table " << endl; 
-        cout << "0.Return " << endl;
-        cout << "Your choice : " << endl; 
-        cin >> keyInput;
-    switch ((ManagerMenuChoice)keyInput)
-    {
-    case ADDDISH:
-        addDish();
-        break;
-    case EDITDISH: 
-        editDish(); 
-        break; 
-    case DELETEDISH: 
-        deleteDish(); 
-        break; 
-    case LISTSHOW: 
-        displayDishList(); 
-        break; 
-    case SETTABLENUM: 
-        setNumberOfTable(); 
-        break; 
-    case RETURN: 
-        return; 
-    default:
-        break;
     }
 }
