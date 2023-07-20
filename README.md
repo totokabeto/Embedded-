@@ -780,3 +780,152 @@ Từ khóa virtual cũng như thông báo cho PC xem class con có ghi đè hàm
 
 Khi class con có hàm trùng tên và được gọi từ main thì sẽ load lại địa chỉ từ class con (overloading)
 
+# Tham chiếu và tham trị 
+
+Sự khác biệt giữ tham chiếu và tham trị rõ ràng nhất là trong các bài tập về list, vì các thành phần trong list chỉ có thể được thay đổi dựa trên địa chỉ nên khi muốn thay đổi thì phải truyền vào 1 địa chỉ. 
+
+Tham trị chẳng qua là hàm sẽ tạo ra một bản sao khác so với biến được truyền vào, thực chất là 2 biến khác nhau và mang 2 địa chỉ riêng biệt, thay đổi giá trị của biến này thì không ảnh hướng đến biến kia và ngược lại. 
+
+Tham chiếu có thể được thực hiện ở C++ bằng cách thêm dấu & trước input argument, thì bản chất biến được truyền vào hàm đó chính là nó. 
+```C++
+#include <iostream> 
+
+using namespace std; 
+
+void test(int a, int &b, int *c){
+    a = 10; 
+    b = 20; 
+    *c = 30; 
+}
+
+int main(int argc, char const *argv[])
+{
+    int x = 1; 
+    int y = 2; 
+    int z = 3; 
+    test(x,y,&z); 
+    cout << x << endl; 
+    cout << y << endl; 
+    cout << z << endl; 
+    return 0;
+}
+```
+
+Trong ví dụ trên thì in ra chỉ có y và z là thay đổi giá trị còn x thì không; cách thứ ba là truyền vào hàm 1 con trỏ, bản chất con trỏ là lưu địa chỉ của biến nên có thể thay đổi giá trị mà địa chỉ đó trỏ đến. 
+
+# Lambda funtion 
+
++Lambda function cho phép định nghĩa và sử dụng 1 hàm ngay trong hàm chính, không cần phải khai báo toàn cục và trỏ tới 1 hàm khác như con trỏ hàm 
+
+cú pháp : 
+
+[capture clause](parameters) -> return-type
+{
+    definition of method;
+}; 
+
+ví dụ : 
+```C++
+int a = 10; 
+auto test = [a](int b){
+    return a - b; 
+};
+cout << test(6); 
+```
+hoặc 
+
+```C++
+auto tong = [](int a, int b){
+    return a +b; 
+};
+```
+Pros : 
+
++ Con trỏ PC không phải trỏ nhiều, liển mạch chương trình -> chạy nhanh hơn 
++ Không tốn nhiều bộ nhớ (không phải tốn các địa chỉ để lưu hàm như hàm local, global).
+
+Mở rộng : 
+
+```C++
+int d;
+int f;
+int z;
+
+auto tong [=]{
+    return d+f+z; 
+}
+```
+Thêm dấu bằng vào thì nó tự hiểu được các biến được dùng trong hàm là các biến được khai báo bên trên, không cần phải liệt kê. 
+
+# Iterator 
+
+Khi làm việc với list,vector,... chúng được gọi là container, khi duyệt thì ta dùng iterator. 
+
+```C++
+list<int>::interator it; 
+for (it = array.begin(); it!= array.end(); ++it){
+    cout << *it << endl; 
+    if (*it == 6){
+        array.erase(it); 
+    }
+}
+```
+
+Iterator sẽ lưu địa chỉ các node. 
+
+# Destructor 
+
+Hàm hủy 
+
+```C++
+
+#include <iostream>
+
+using namespace std; 
+
+class SinhVien
+{
+private:
+    int ID;
+    int *ptr; 
+public:
+    SinhVien(/* args */);
+    ~SinhVien();
+    int getID(){
+        return this->ID; 
+    }
+};
+
+SinhVien::SinhVien(/* args */)
+{
+    static int id = 100; 
+    ID = id; 
+    ptr = &id;
+    id++; 
+}
+
+SinhVien::~SinhVien()
+{
+    *ptr = 100; 
+}
+
+void test1(){
+    SinhVien sv1,sv2; 
+    cout << sv1.getID() << endl; 
+    cout << sv2.getID() << endl; 
+}
+void test2(){
+    SinhVien sv1,sv2; 
+    cout << sv1.getID() << endl; 
+    cout << sv2.getID() << endl; 
+}
+int main(int argc, char const *argv[])
+{
+    test1();
+    test2(); 
+    return 0;
+}
+
+```
+
++ Khi khởi tạo 1 object thì vùng nhớ mà nó khởi tạo là vùng nhớ stack khi hủy thì sẽ hoạt động theo kiểu LIFO , Last In First Out, cái nào được khởi tạo cuối cùng thì sẽ được hủy trước, cách hoạt động của stack. 
