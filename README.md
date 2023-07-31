@@ -815,7 +815,7 @@ Trong ví dụ trên thì in ra chỉ có y và z là thay đổi giá trị cò
 
 # Lambda funtion 
 
-+Lambda function cho phép định nghĩa và sử dụng 1 hàm ngay trong hàm chính, không cần phải khai báo toàn cục và trỏ tới 1 hàm khác như con trỏ hàm 
++ Lambda function cho phép định nghĩa và sử dụng 1 hàm ngay trong hàm chính, không cần phải khai báo toàn cục và trỏ tới 1 hàm khác như con trỏ hàm 
 
 cú pháp : 
 
