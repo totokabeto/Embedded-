@@ -176,7 +176,8 @@ Khi cấp nguồn khởi tạo địa chỉ đầu tiên là `0x00`  đồng th�
 int main(){       0x01
                   0x02 
     while(1){     0x03 
-        A();      0x04 (lưu vào stack pointer)
+        A();      0x04 
+					0x05 (lưu vào stack pointer)
     }
 }
 
@@ -398,7 +399,7 @@ một hàm được extern có chứa biến static thì vẫn chạy được d
 
 # Bài 7 Pointer 
 
-Khi khởi tạo 1 biến thì biến được lưu vào RAM, đặc trưng bằng địa chỉ và giá trị địa chỉ 
+Khi khởi tạo 1 biến thì biến được lưu vào RAM, đặc trưng bằng `địa chỉ` và `giá trị địa chỉ` 
 
  <img src="https://media.geeksforgeeks.org/wp-content/uploads/pointers-in-c.png">
 
