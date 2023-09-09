@@ -747,9 +747,8 @@ void receive_Can_message(){
 }
 ```
 ### Remote Frame 
-    ```C
-// test remote frame : 
 
+```C
 void requestTemperatureData(){
     CanTxMsg txMessage; 
     txMessage.StdId = 0x123; 
