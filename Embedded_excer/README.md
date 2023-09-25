@@ -747,9 +747,8 @@ void receive_Can_message(){
 }
 ```
 ### Remote Frame 
-    ```C
-// test remote frame : 
 
+```C
 void requestTemperatureData(){
     CanTxMsg txMessage; 
     txMessage.StdId = 0x123; 
@@ -757,7 +756,6 @@ void requestTemperatureData(){
     txMessage.RTR = CAN_RTR_REMOTE; // chuẩn data frame
     txMessage.IDE = CAN_ID_STD; // IDE chuẩn 
     txMessage.DLC = 0; // GỬI Thông điệp chứ ko gửi data nên = 0; 
-
     CAN_Transmit(CAN1, &txMessage); // node nào nhận dc thông điệp thì sẽ phản hồi 
 }
 ```
