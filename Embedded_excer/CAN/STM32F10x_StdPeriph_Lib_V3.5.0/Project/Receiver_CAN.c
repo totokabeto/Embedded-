@@ -150,6 +150,12 @@ void receiveSpeedData(){
     }
     }
 }
+// error frame 
+/*
+Error frame - trong quá trình truyền bị nhiễu gây cho data bị lỗi dẫn đến toàn bộ data sẽ bị lỗi, check sum cũng sẽ bị sai 
+2 cách xử lý : 
++In ra lỗi log - tương tự như C/C++ dùng prinf hay cout 
+*/
 // Overload Frame vi điều khiển không đáp ứng được tốc độ, thằng nhanh thằng chậm, truyền không kịp hoặc đợi không kịp , dây dài quá , cũng sẽ log lỗi giống như error frame 
 int main(int argc, char const *argv[])
 {
